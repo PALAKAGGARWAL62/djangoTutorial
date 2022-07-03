@@ -16,7 +16,7 @@ def home(request):
 def page1(request):
     # select * from fruit
     f = Fruit.objects.all()
-    print(f.values())
-    print(f.values()[0])
+    # print(f.values())
+    # print(f.values()[0])
     context = {'fruits':f.values()}
     return render(request, 'poll/page1.html', context)
