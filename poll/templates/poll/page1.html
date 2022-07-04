@@ -8,12 +8,24 @@
 </head>
 <body>
     <h1> FRUITS </h1>
-    <p> {{fruits}}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        Name of the fruit: <input type="text" name="name"><br><br>
+        Color of the fruit: <input type="text" name="color"><br><br>
+        Taste of the fruit: <input type="text" name="taste"><br><br>
+        Price of the fruit: <input type="text" name="price"><br><br>
+        Quantity of the fruit: <input type="text" name="quantity"><br><br>
+        <br>
+        <input type="Submit">
+    </form>
+
+    {% comment %} <p> {{fruits}}</p> {% endcomment %}
     <br>
     <ul>
         {% for fruit in fruits %}
             <li>
-                {{fruit}}<br>
+                {% comment %} {{fruit}}<br> {% endcomment %}
                 {{fruit.name}}<br>
                 {{fruit.price}}<br>
                 {{fruit.color}}<br>
@@ -24,6 +36,7 @@
         {% endfor %}
     </ul>
 
+    {% comment %} <!-- {{yf}} --> {% endcomment %}
     <br>
     <hr>
     <a href="/">Home</a>
