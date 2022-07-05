@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +12,18 @@
     <h1>HI there, this is class 1</h1> 
 
     {{Name}} <br>{{date}} <br> {{year}}
-
-    <form method="get">
+    <hr>
+    <h6> {{leap}} </h6>
+    <hr>
+    <form method="post">
+        {% csrf_token %}
         Enter year of your choice <br>
         <input type="text" name="year"> <br> 
         <input type="submit">
     </form>
     <br>
+    <hr>
+    <img src="{% static 'img/Screenshot (1).png' %}">
     <hr>
     <a href="/page1">Page 1</a>
 </body>

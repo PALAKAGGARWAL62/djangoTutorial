@@ -5,12 +5,28 @@ from .models import Fruit
 
 # Create your views here.
 def home(request):
-    print('------->', request.GET)
-    y = request.GET.get('year')
-    context = {'Name': 'Esha', 'date':datetime.now(), 'year':y, }
+    context = {'Name': 'Esha', 'date':datetime.now(),}
+    if request.method == 'POST':
+        y = request.POST.get('year')
+        s = ''
+        if y is not None:
+            y = int(y)
+            if y%100==0:
+                if y%400==0:
+                    s = 'Leap year'
+                else: s = 'Non Leap year'
 
-    return render(request, 'poll/home.html', context=context)
-    return HttpResponse('<h1>Hello There</h1>')
+            elif y%100!=0:
+                if y%4 == 0:
+                    s = 'Leap year'
+                else: s = 'Non Leap year'
+        context['year']=y 
+        context['leap']=s
+        print(context)
+        return render(request, 'poll/home.html', context=context)
+    if request.method=='GET':
+        return render(request, 'poll/home.html', context=context)
+    # return HttpResponse('<h1>Hello There</h1>')
 
 
 def page1(request):
