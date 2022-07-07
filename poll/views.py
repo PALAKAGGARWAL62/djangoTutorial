@@ -2,6 +2,10 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from datetime import datetime
 from .models import Fruit
+from django.conf import settings
+
+filepath = settings.MEDIA_ROOT / 'hello.txt'
+
 
 # Create your views here.
 def home(request):
@@ -62,3 +66,12 @@ DML - insertion, deletion, read, update (CRUD)
 DCL - grant, revoke, roles
 Tcl - commit, rollback, savepoint 
 '''
+
+
+def page2(request):
+    f = open(filepath, 'r')
+    l = f.readlines()
+    context = {'file_content':l}
+    return render(request, 'poll/page2.html', context)
+
+    
