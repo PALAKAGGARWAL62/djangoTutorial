@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}
+{{title}}
+{% endblock title %}
+
+{% block content %}
     <h1> FRUITS </h1>
 
     <form method="post">
@@ -25,7 +23,7 @@
     <ul>
         {% for fruit in fruits %}
             <li>
-                {% comment %} {{fruit}}<br> {% endcomment %}
+                {{fruit}}<br>
                 {{fruit.name}}<br>
                 {{fruit.price}}<br>
                 {{fruit.color}}<br>
@@ -33,6 +31,15 @@
                 {{fruit.quantity}}<br>
             </li>
             <hr>
+            {% for k, v in fruit.items %}
+                {{k}} --- {{v}} <br>
+                {% comment %} {% if k == 'name' and v == 'Mango' %}
+                    <h1> I love it </h1>
+                {% else %}
+                    <h1> This is ok </h1>
+                {% endif %} {% endcomment %}
+            {% endfor %}
+            <hr><hr>
         {% endfor %}
     </ul>
 
@@ -40,5 +47,4 @@
     <br>
     <hr>
     <a href="/">Home</a>
-</body>
-</html>
+{% endblock content %}

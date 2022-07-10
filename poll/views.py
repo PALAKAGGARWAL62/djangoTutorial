@@ -9,7 +9,7 @@ filepath = settings.MEDIA_ROOT / 'hello.txt'
 
 # Create your views here.
 def home(request):
-    context = {'Name': 'Esha', 'date':datetime.now(),}
+    context = {'Name': 'Esha', 'date':datetime.now(),'title':'Home'}
     if request.method == 'POST':
         y = request.POST.get('year')
         s = ''
@@ -57,7 +57,7 @@ def page1(request):
     f1 = Fruit.objects.filter(color__iexact='yellow')
     # print(f.values())
     # print(f.values()[0])
-    context = {'fruits':f.values(), 'yf':f1.values()}
+    context = {'fruits':f.values(), 'yf':f1.values(),'title':'Page 1'}
     return render(request, 'poll/page1.html', context)
 
 '''
@@ -71,7 +71,7 @@ Tcl - commit, rollback, savepoint
 def page2(request):
     f = open(filepath, 'r')
     l = f.readlines()
-    context = {'file_content':l}
+    context = {'file_content':l,'title':'Page 2', 'var':None,}
     return render(request, 'poll/page2.html', context)
 
     

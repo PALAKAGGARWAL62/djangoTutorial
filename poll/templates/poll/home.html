@@ -1,14 +1,12 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+
+{% block title %}
+{{title}}
+{% endblock title %}
+
+{% block content %}
     <h1>HI there, this is class 1</h1> 
 
     {{Name}} <br>{{date}} <br> {{year}}
@@ -26,5 +24,4 @@
     <img src="{% static 'img/wp2840995-europe-wallpapers.jpg' %}">
     <hr>
     <a href="/page1">Page 1</a>
-</body>
-</html>
+{% endblock content %}
