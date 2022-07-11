@@ -1,3 +1,4 @@
+from tkinter import CASCADE
 from django.db import models
 
 # Create your models here.
@@ -10,4 +11,17 @@ class Fruit(models.Model):
 
     def __str__(self):
         return self.name
+
+class Place(models.Model):
+    name = models.CharField(max_length=100, null=True, blank=True)
+    address = models.CharField(max_length=100, null=True, blank=True)
+
+class Restaurant(models.Model):
+    place = models.OneToOneField(Place, on_delete=models.CASCADE, primary_key=True)
+    serves_hot_dogs = models.BooleanField(default=False)
+    serves_pizza = models.BooleanField(default=False)
+
+class Waiter(models.Model):
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=100, null=True, blank=True)
 
