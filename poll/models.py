@@ -1,4 +1,3 @@
-from tkinter import CASCADE
 from django.db import models
 
 # Create your models here.
@@ -25,3 +24,11 @@ class Waiter(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=100, null=True, blank=True)
 
+class Publication(models.Model):
+    title = models.CharField(max_length=100, null=True, blank=True)
+
+class Article(models.Model):
+    headline = models.CharField(max_length=100, null=True, blank=True)
+    publication = models.ManyToManyField(Publication)
+
+    
