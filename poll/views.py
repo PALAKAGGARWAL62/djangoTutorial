@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from datetime import datetime
 from .models import Fruit
 from django.conf import settings
+from .forms import *
 
 filepath = settings.MEDIA_ROOT / 'hello.txt'
 
@@ -75,3 +76,12 @@ def page2(request):
     return render(request, 'poll/page2.html', context)
 
     
+def page3(request):
+    if request.method=='POST':
+        print(request.POST)
+        return redirect('poll:page3', permanent=True)
+    else:
+        form = NameForm()
+        context = {'form':form, 'title':'Page 3'}
+        return render(request, 'poll/page3.html', context,)
+
