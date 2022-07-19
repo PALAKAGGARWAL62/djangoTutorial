@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from datetime import datetime
@@ -79,9 +80,23 @@ def page2(request):
 def page3(request):
     if request.method=='POST':
         print(request.POST)
+        f = NameForm(request.POST)
+        print(f.is_bound)
+        # print(f.clean())
+        print(f.is_valid)
         return redirect('poll:page3', permanent=True)
     else:
         form = NameForm()
         context = {'form':form, 'title':'Page 3'}
         return render(request, 'poll/page3.html', context,)
 
+def page4(request):
+    if request.method=='POST':
+        f = FruitForm(request.POST)
+        f.save()
+        print(request.POST)
+        return redirect('poll:page4', permanent=True)
+    else:
+        form = FruitForm()
+        context = {'form':form, 'title':'Page 4'}
+        return render(request, 'poll/page3.html', context,)
