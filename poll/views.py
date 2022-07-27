@@ -92,11 +92,18 @@ def page3(request):
 
 def page4(request):
     if request.method=='POST':
-        f = FruitForm(request.POST)
-        f.save()
         print(request.POST)
+        # f = FruitForm(request.POST)
+        # fobj = f.save(commit=False)
+        # fobj.name = (fobj.name).upper()
+        # fobj.save()
+        a = ArticleForm(request.POST)
+        asave = a.save(commit=False)
+        asave.save()
+        a.save_m2m()
         return redirect('poll:page4', permanent=True)
     else:
-        form = FruitForm()
+        # form = FruitForm()
+        form = ArticleForm()
         context = {'form':form, 'title':'Page 4'}
         return render(request, 'poll/page3.html', context,)

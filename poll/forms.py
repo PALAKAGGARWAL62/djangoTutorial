@@ -5,7 +5,7 @@ Model Forms - data directly goes in db
 '''
 from django import forms
 from django.forms import ModelForm, Textarea
-from .models import Fruit
+from .models import Article, Fruit, Publication
 
 class NameForm(forms.Form):
     name = forms.CharField(label='Your Name', max_length=100)
@@ -21,3 +21,12 @@ class FruitForm(ModelForm):
             'name':Textarea(attrs={'cols':80, 'row':20,},)
         }
 
+class PublicationForm(ModelForm):
+    class Meta:
+        model = Publication
+        fields = '__all__'
+
+class ArticleForm(ModelForm):
+    class Meta:
+        model = Article
+        fields = '__all__'
