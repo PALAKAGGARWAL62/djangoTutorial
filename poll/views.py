@@ -1,10 +1,12 @@
-from multiprocessing import context
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from datetime import datetime
 from .models import Fruit
 from django.conf import settings
 from .forms import *
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+# from rest_framework import permissions
+from .serializers import UserSerializer, GroupSerializer
 
 filepath = settings.MEDIA_ROOT / 'hello.txt'
 
@@ -104,6 +106,24 @@ def page4(request):
         return redirect('poll:page4', permanent=True)
     else:
         # form = FruitForm()
-        form = ArticleForm()
+        # form = ArticleForm()
+        form = ArticleFormSet()
         context = {'form':form, 'title':'Page 4'}
         return render(request, 'poll/page3.html', context,)
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+
+

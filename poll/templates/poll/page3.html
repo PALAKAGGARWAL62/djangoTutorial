@@ -9,5 +9,43 @@
         {{form.as_p}}
     <input type="submit" value=" Submit">
 </form>
+<br><hr>
+<form method="post">
+    {% csrf_token %}
+        
+    {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+        {{ form.headline.errors }}
+        {{ form.subject.label_tag }}
+        <label for="{{ form.headline.id_for_label }}">Article headline:</label>
+        {{ form.headline }}
+    </div>
+    <br>
+    <div class="fieldWrapper">
+        {{ form.publication.errors }}
+        {{ form.subject.label_tag }}
+        <label for="{{ form.publication.id_for_label }}">Article publication:</label>
+        {{ form.publication }}
+    </div>
+
+    <input type="submit" value=" Submit">
+</form>
+
+<br><hr>
+<form method="post">
+    {% csrf_token %}   
+    {{ form.non_field_errors }}
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            
+            <label for="{{ field.id_for_label }}">{{ field.label_tag }} </label>
+            {{ field }}
+        </div>
+        <br>
+    {% endfor %}
+    <br>
+    <input type="submit" value=" Submit">
+</form>
 
 {% endblock content %}

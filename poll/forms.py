@@ -3,8 +3,9 @@ HTML Forms - basic form which can help us to take user inputs
 Django Forms - Data doesn't directly go in db
 Model Forms - data directly goes in db
 '''
+from cProfile import label
 from django import forms
-from django.forms import ModelForm, Textarea
+from django.forms import ModelForm, Textarea, formset_factory
 from .models import Article, Fruit, Publication
 
 class NameForm(forms.Form):
@@ -30,3 +31,6 @@ class ArticleForm(ModelForm):
     class Meta:
         model = Article
         fields = '__all__'
+
+ArticleFormSet = formset_factory(ArticleForm, extra=2)
+
