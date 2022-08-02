@@ -1,3 +1,4 @@
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from datetime import datetime
 from .models import Fruit
@@ -6,7 +7,9 @@ from .forms import *
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 # from rest_framework import permissions
-from .serializers import UserSerializer, GroupSerializer
+from .serializers import UserSerializer, GroupSerializer, FruitSerializer, FSerializer
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 
 filepath = settings.MEDIA_ROOT / 'hello.txt'
 
@@ -125,5 +128,14 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
+def fruitview(request):
+    # fruit = Fruit(name='gauva')
+    # fruit.save()
+    fruit = Fruit.objects.all()
+    serializer = FSerializer(fruit, many = True)
+    print(serializer.data)
+    context = serializer.data
+    # context = JSONRenderer().render(serializer.data)
 
+    return JsonResponse(context,safe=False)
 
